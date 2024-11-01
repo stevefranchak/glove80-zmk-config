@@ -199,7 +199,7 @@
             timeout-ms = <50>;
             key-positions = <69 38>;
             bindings = <&caps_word>
-        }
+        };
     };
 
     keymap {
