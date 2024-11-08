@@ -44,7 +44,7 @@
         HRM_left_index_v1_TKZ: HRM_left_index_v1_TKZ {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
-            tapping-term-ms = <210>;
+            tapping-term-ms = <200>;
             bindings = <&kp>, <&kp>;
             flavor = "tap-preferred";
             quick-tap-ms = <300>;
@@ -96,7 +96,7 @@
         HRM_right_index_v1_TKZ: HRM_right_index_v1_TKZ {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
-            tapping-term-ms = <210>;
+            tapping-term-ms = <200>;
             bindings = <&kp>, <&kp>;
             flavor = "tap-preferred";
             quick-tap-ms = <300>;
