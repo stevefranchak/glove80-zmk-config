@@ -200,6 +200,13 @@
             key-positions = <69 38>;
             bindings = <&caps_word>;
         };
+
+        // combo for caps lock is SPACE+g (since it should be used less commonly)
+        combo_capslock {
+            timeout-ms = <50>;
+            key-positions = <69 39>;
+            bindings = <&kp CAPS>;
+        }
     };
 
     keymap {
