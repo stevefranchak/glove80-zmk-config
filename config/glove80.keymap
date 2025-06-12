@@ -15,10 +15,11 @@
 
 // layers
 #define DEFAULT 0
-#define LOWER 1
-#define MAGIC 2
-#define FACTORY_TEST 3
-#define WINDOWS 4
+#define WINDOWS 1
+#define LOWER 2
+#define MAGIC 3
+#define FACTORY_TEST 4
+
 
 / {
     behaviors {
@@ -144,22 +145,6 @@
             hold-trigger-key-positions = <52 53 54 71 70 69 0 1 10 11 12 13 14 22 23 24 25 26 27 34 35 36 37 38 39 46 47 48 49 50 51 64 65 66 67 68 15 4 2 3 55 56 57 72 73 74>;
             hold-trigger-on-release;
         };
-
-        // swap to the default layer (which is the typing layer for macos) - done via the MAGIC layer
-        to_mac_layer: to_mac_layer {
-            compatible = "zmk,behavior-macro";
-            label = "SET_MAC_LAYER";
-            #binding-cells = <0>;
-            bindings = <&to DEFAULT>;
-        };
-
-        // swap to the windows layer (which is the typing layer for windows) - done via the MAGIC layer
-        to_windows_layer: to_windows_layer {
-            compatible = "zmk,behavior-macro";
-            label = "SET_WINDOWS_LAYER";
-            #binding-cells = <0>;
-            bindings = <&to WINDOWS>;
-        };
     };
 
     macros {
@@ -229,6 +214,8 @@
     // Differences compared to default glove80 config (for typing layers):
     //  - Swapped the position of backspace and space (space is on the left thumb cluster, backspace is on the right thumb cluster)
     //  - Using home row mods
+    //  - Changed order of layers since the default and windows layers are both "base layers" and, according to zmk docs, should have the lowest values
+    //  - Added a toggle for toggling the Windows layer to the MAGIC layer (mapped to F3)
     keymap {
         compatible = "zmk,keymap";
 
@@ -239,6 +226,18 @@
             &kp EQUAL      &kp N1                          &kp N2                         &kp N3                         &kp N4                          &kp N5                                                                     &kp N6  &kp N7                           &kp N8                          &kp N9                          &kp N0                                &kp MINUS
             &kp TAB        &kp Q                           &kp W                          &kp E                          &kp R                           &kp T                                                                      &kp Y   &kp U                            &kp I                           &kp O                           &kp P                                 &kp BSLH
             &kp ESC        &HRM_left_pinky_v1_TKZ LCTRL A  &HRM_left_ring1_v1_TKZ LALT S  &HRM_left_middy_v1_TKZ LGUI D  &HRM_left_index_v1_TKZ LSHFT F  &kp G                                                                      &kp H   &HRM_right_index_v1_TKZ LSHFT J  &HRM_right_middy_v1_TKZ LGUI K  &HRM_right_ring1_v1_TKZ LALT L  &HRM_right_pinky_v1_TKZ LCTRL SEMI    &kp SQT
+            &kp GRAVE      &kp Z                           &kp X                          &kp C                          &kp V                           &kp B   &kp LSHFT   &kp LGUI   &layer_td  &kp LCTRL  &kp RGUI  &kp RSHFT   &kp N   &kp M                            &kp COMMA                       &kp DOT                         &kp FSLH                              &kp PG_UP
+            &magic MAGIC 0 &kp HOME                        &kp END                        &kp LEFT                       &kp RIGHT                               &kp SPACE   &kp DEL    &kp LALT   &kp RALT   &kp RET   &kp BSPC            &kp UP                           &kp DOWN                        &kp LBKT                        &kp RBKT                              &kp PG_DN
+            >;
+        };
+
+        // windows-specific typing layer (home row mods are GACS)
+        windows_layer {
+            bindings = <
+            &kp F1         &kp F2                          &kp F3                         &kp F4                         &kp F5                                                                                                             &kp F6                           &kp F7                          &kp F8                          &kp F9                                &kp F10
+            &kp EQUAL      &kp N1                          &kp N2                         &kp N3                         &kp N4                          &kp N5                                                                     &kp N6  &kp N7                           &kp N8                          &kp N9                          &kp N0                                &kp MINUS
+            &kp TAB        &kp Q                           &kp W                          &kp E                          &kp R                           &kp T                                                                      &kp Y   &kp U                            &kp I                           &kp O                           &kp P                                 &kp BSLH
+            &kp ESC        &HRM_left_pinky_v1_TKZ LGUI A  &HRM_left_ring1_v1_TKZ LALT S  &HRM_left_middy_v1_TKZ LCTRL D  &HRM_left_index_v1_TKZ LSHFT F  &kp G                                                                      &kp H   &HRM_right_index_v1_TKZ LSHFT J  &HRM_right_middy_v1_TKZ LCTRL K  &HRM_right_ring1_v1_TKZ LALT L  &HRM_right_pinky_v1_TKZ LGUI SEMI    &kp SQT
             &kp GRAVE      &kp Z                           &kp X                          &kp C                          &kp V                           &kp B   &kp LSHFT   &kp LGUI   &layer_td  &kp LCTRL  &kp RGUI  &kp RSHFT   &kp N   &kp M                            &kp COMMA                       &kp DOT                         &kp FSLH                              &kp PG_UP
             &magic MAGIC 0 &kp HOME                        &kp END                        &kp LEFT                       &kp RIGHT                               &kp SPACE   &kp DEL    &kp LALT   &kp RALT   &kp RET   &kp BSPC            &kp UP                           &kp DOWN                        &kp LBKT                        &kp RBKT                              &kp PG_DN
             >;
@@ -257,7 +256,7 @@
 
         magic_layer {
             bindings = <
-            &bt BT_CLR        &to_mac_layer     &to_windows_layer &none           &none                                                                                                           &none      &none      &none      &none      &bt BT_CLR_ALL
+            &bt BT_CLR        &none               &tog WINDOWS    &none           &none                                                                                                           &none      &none      &none      &none      &bt BT_CLR_ALL
             &none             &none               &none           &none           &none           &none                                                                                &none      &none      &none      &none      &none      &none
             &none             &rgb_ug RGB_SPI     &rgb_ug RGB_SAI &rgb_ug RGB_HUI &rgb_ug RGB_BRI &rgb_ug RGB_TOG                                                                      &none      &none      &none      &none      &none      &none
             &bootloader       &rgb_ug RGB_SPD     &rgb_ug RGB_SAD &rgb_ug RGB_HUD &rgb_ug RGB_BRD &rgb_ug RGB_EFF                                                                      &none      &none      &none      &none      &none      &bootloader
@@ -274,18 +273,6 @@
             &kp N3   &kp N9   &kp N5   &kp N1   &kp N7   &kp N2                                                            &kp N2   &kp N7   &kp N1   &kp N5   &kp N9   &kp N3
             &kp N4   &kp N0   &kp N6   &kp N2   &kp N8   &kp N3   &kp N4   &kp N5   &kp N6      &kp N6   &kp N5   &kp N4   &kp N3   &kp N8   &kp N2   &kp N6   &kp N0   &kp N4
             &kp N5   &kp N1   &kp N7   &kp N3   &kp N9            &kp N7   &kp N8   &kp N9      &kp N9   &kp N8   &kp N7            &kp N9   &kp N3   &kp N7   &kp N1   &kp N5
-            >;
-        };
-
-        // windows-specific typing layer (home row mods are GACS)
-        windows_layer {
-            bindings = <
-            &kp F1         &kp F2                          &kp F3                         &kp F4                         &kp F5                                                                                                             &kp F6                           &kp F7                          &kp F8                          &kp F9                                &kp F10
-            &kp EQUAL      &kp N1                          &kp N2                         &kp N3                         &kp N4                          &kp N5                                                                     &kp N6  &kp N7                           &kp N8                          &kp N9                          &kp N0                                &kp MINUS
-            &kp TAB        &kp Q                           &kp W                          &kp E                          &kp R                           &kp T                                                                      &kp Y   &kp U                            &kp I                           &kp O                           &kp P                                 &kp BSLH
-            &kp ESC        &HRM_left_pinky_v1_TKZ LGUI A  &HRM_left_ring1_v1_TKZ LALT S  &HRM_left_middy_v1_TKZ LCTRL D  &HRM_left_index_v1_TKZ LSHFT F  &kp G                                                                      &kp H   &HRM_right_index_v1_TKZ LSHFT J  &HRM_right_middy_v1_TKZ LCTRL K  &HRM_right_ring1_v1_TKZ LALT L  &HRM_right_pinky_v1_TKZ LGUI SEMI    &kp SQT
-            &kp GRAVE      &kp Z                           &kp X                          &kp C                          &kp V                           &kp B   &kp LSHFT   &kp LGUI   &layer_td  &kp LCTRL  &kp RGUI  &kp RSHFT   &kp N   &kp M                            &kp COMMA                       &kp DOT                         &kp FSLH                              &kp PG_UP
-            &magic MAGIC 0 &kp HOME                        &kp END                        &kp LEFT                       &kp RIGHT                               &kp SPACE   &kp DEL    &kp LALT   &kp RALT   &kp RET   &kp BSPC            &kp UP                           &kp DOWN                        &kp LBKT                        &kp RBKT                              &kp PG_DN
             >;
         };
     };
