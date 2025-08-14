@@ -240,13 +240,6 @@
                 = <&out OUT_BLE>,
                   <&bt BT_SEL 3>;
         };
-
-        tog_symbols: toggle_symbols_on {
-            label = "TOGGLE_SYMBOLS_ON";
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&mo DEFAULT>, <&to SYMBOLS>;
-        };
     };
 
     combos {
@@ -339,12 +332,12 @@
 
         symbol_layer {
             bindings = <
-            &none           &none         &tog SYMBOLS &none         &none                                                                                            &none         &kp LS(COMMA)   &kp LS(DOT) &none         &none
+            &none           &none         &none        &none         &none                                                                                            &none         &kp LS(COMMA)   &kp LS(DOT) &none         &none
             &kp GRAVE       &kp RBKT      &kp LS(N9)   &kp LS(N0)    &kp COMMA      &kp DOT                                                               &kp LBKT    &kp RBKT      &kp EQUAL       &kp FSLH    &kp LS(8)     &none
             &kp LBKT        &kp LS(N1)    &kp LS(LBKT) &kp LS(RBKT)  &kp SEMI       &kp LS(FSLH)                                                          &kp GRAVE   &kp N7        &kp N8          &kp N9      &kp MINUS     &kp ESC
             &kp LS(N3)      &kp LS(N6)    &kp EQUAL    &kp LS(MINUS) &kp LS(N4)     &kp LS(N8)                                                            &kp LS(SQT) &kp N4        &kp N5          &kp N6      &kp LS(EQUAL) &kp TAB
             &kp LS(GRAVE)   &kp LS(COMMA) &kp LS(BSLH) &kp MINUS     &kp LS(DOT)    &kp FSLH     &none &none &none    &kp DOT    &kp BSLH     &kp LS(N5)  &kp SQT     &kp N1        &kp N2          &kp N3      &kp LS(N9)    &kp LS(N0)
-            &tog_symbols    &kp LS(N7)    &kp SQT      &kp LS(SQT)   &kp LS(EQUAL)               &none &none &none    &kp LS(N2) &kp LS(SEMI) &kp BSPC                &kp N0        &kp N0          &kp DOT     &kp LS(LBKT)  &kp LS(RBKT)
+            &none           &kp LS(N7)    &kp SQT      &kp LS(SQT)   &kp LS(EQUAL)               &none &none &none    &kp LS(N2) &kp LS(SEMI) &kp BSPC                &kp N0        &kp N0          &kp DOT     &kp LS(LBKT)  &kp LS(RBKT)
             >;
         };
     };
