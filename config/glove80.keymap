@@ -77,7 +77,7 @@
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "tap-preferred";
-            quick-tap-ms = <150>;
+            quick-tap-ms = <195>;
             tapping-term-ms = <200>;
             require-prior-idle-ms = <100>;
             bindings = <&mo>, <&kp>;
@@ -332,7 +332,7 @@
 
         symbol_layer {
             bindings = <
-            &none           &none         &none        &none         &none          &none                                                                             &none    &none     &none    &none         &none
+            &none           &none         &none        &none         &none                                                                                            &none    &none     &none    &none         &none
             &kp GRAVE       &kp RBKT      &kp LS(N9)   &kp LS(N0)    &kp COMMA      &kp DOT                                                               &kp LBKT    &kp RBKT &kp EQUAL &kp FSLH &kp LS(8)     &none
             &kp LBKT        &kp LS(N1)    &kp LS(LBKT) &kp LS(RBKT)  &kp SEMI       &kp LS(FSLH)                                                          &kp GRAVE   &kp N7   &kp N8    &kp N9   &kp MINUS     &kp ESC
             &kp LS(N3)      &kp LS(N6)    &kp EQUAL    &kp LS(MINUS) &kp LS(N4)     &kp LS(N8)                                                            &kp LS(SQT) &kp N4   &kp N5    &kp N6   &kp LS(EQUAL) &kp TAB
